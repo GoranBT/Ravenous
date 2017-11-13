@@ -38,6 +38,8 @@ const Yelp = {
             rating: business.rating,
             reviewCount: business.review_count
           }));
+        } else {
+          return [];
         }
       });
   }
