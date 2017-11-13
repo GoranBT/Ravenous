@@ -10,6 +10,7 @@ const sortByOptions = {
 
 
 
+
 class SearchBar extends React.Component {
   constructor(props){
     super(props);
@@ -19,24 +20,30 @@ class SearchBar extends React.Component {
       sortBy: 'best_match'
     };
     this.handleSortByChange = this.handleSortByChange.bind(this);
+    // this.sortByOptionValue = this.sortByOptionValue.bind(this);
 
-  }
-
-  getSortByClass(sortByOption){
-    this.state.sortBy === sortByOption ? 'active' : '';
-
-  }
-
-  handleSortByChange(sortByOption){
-    this.setState({ sortBy: sortByOption }, () => console.log(this.state));
   }
 
   renderSortByOptions(){
     return Object.keys(sortByOptions).map(sortByOption => {
       const sortByOptionValue = sortByOptions[sortByOption];
-      return <li key={sortByOptionValue} onClick={this.handleSortByChange}>{sortByOption}</li>;
+      return <li
+        key={sortByOptionValue}
+        className={this.getSortByClass(sortByOptionValue)}
+        onClick={this.handleSortByChange.bind(this,sortByOptionValue)}>
+        {sortByOption}
+      </li>;
     });
   }
+
+  getSortByClass(sortByOption){
+    this.state.sortBy === sortByOption ? 'active' : '';
+  }
+
+  handleSortByChange(sortByOption){
+    this.setState({ sortBy: sortByOption }, () => console.log(this.state));
+  }
+  
   render(){
     return(<div className="SearchBar">
       <div className="SearchBar-sort-options">
